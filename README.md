@@ -1,4 +1,9 @@
-# `eip-3074-foundry`
+# Generalized Interpretable Invoker
+- Under Construction
+
+A generalized, interpretable batch invoker that uses a factory + delegatecall pattern to enforce AUTH and AUTHCALL conditions that the sender signed over in their AUTH commit.  An emphasis was made to preserve flexibility while retaining rigid interpretability so that wallets can give the AUTH signer a clearer picture of the safety of the AUTH theyre signing.
+
+# Forked From `eip-3074-foundry` https://github.com/anton-rs/3074-invokers
 
 This repository contains patched versions of [`foundry`][foundry] & [the `solidity` compiler][solc], integrated with patches to [`revm`][revm] / [`ethers-rs`][ethers-rs], that support
 the [EIP-3074][eip-3074] opcodes (`AUTH` & `AUTHCALL`).
