@@ -33,10 +33,16 @@ abstract contract BaseAuth {
 
     function authCallSimple(address to, bytes memory data, uint256 value, uint256 gasLimit)
         internal
-        returns (bool success)
+        returns (bool success, bytes memory returndata)
     {
+        // heavily modified by Thogard who is admittedly not the best w/ assembly
         assembly {
             success := authcall(gasLimit, to, value, 0, add(data, 0x20), mload(data), 0, 0)
+
+            returndata := mload(0x40) // assign offset from free memory pointer
+            mstore(returndata, returndatasize()) // store length
+            returndatacopy(add(returndata, 0x20), 0, returndatasize()) // copy returndata
+            mstore(0x40, add(returndata, add(returndatasize(), 0x20))) // update free memory pointer
         }
     }
 
